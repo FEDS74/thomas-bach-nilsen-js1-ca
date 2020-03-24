@@ -19,21 +19,36 @@ fetch(corsEnabledUrl)
   });
 
 
-
-
-
-const typeClass = document.querySelector(".details");
-typeClass.ClassList.add("test");
-console.dir(typeClass);
-
-
-
-
 function loopAPI(resultsObject){
   const resultsArray = resultsObject.results;
 
-  resultsArray.forEach(function(results){
-    const imageCharacter = document.querySelector(".image");
+  let newHTML = "";
+
+  resultsArray.forEach(function(results) {
+console.log(results);
+    newHTML += `<div class="col-sm-6 col-md-4 col-lg-3">
+    <div class="card">
+        <img class="image" src="https://via.placeholder.com/300" alt=${results.name}>
+        <div class="details">
+            <h4 class="name">${results.name}</h4>
+            <p>Type: ${results.type}</p>
+            <p>Episode count: </p>
+            <a class="btn btn-primary" href="details.html?id=">Details</a>
+        </div>
+    </div>
+</div>`;
+});
+
+const resultsContainer = document.querySelector(".results");
+container.innerHTML = newHTML;
+
+}
+
+
+
+
+
+    /*const imageCharacter = document.querySelector(".image");
     imageCharacter.src = results.image;
     imageCharacter.alt = results.name;
 
@@ -48,5 +63,4 @@ function loopAPI(resultsObject){
       typeCharacter = "Unknown";
     }
 
-  });
-}
+  */
