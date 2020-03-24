@@ -1,10 +1,19 @@
 const queryString = document.location.search;
 const params = new URLSearchParams(queryString);
 
+let id;
+
+if (params.has("id")) {
+  id = params.get("id");
+} else {
+  document.location.href = "/";
+}
+
+
 
 const characterUrl = "https://rickandmortyapi.com/api/character/";
 const corsEnabledUrl = "https://cors-anywhere.herokuapp.com/" + characterUrl;
-
+const characterIdUrl = "${corsEnabledUrl}${id}";
 
 
 fetch(corsEnabledUrl)
@@ -14,53 +23,48 @@ fetch(corsEnabledUrl)
   .then(function(json) {
     loopAPI(json);
   })
-  .catch(function(){
-    document.location.href = "error.html";
+  .catch(function() {
+    //document.location.href = "error.html";
+    //console.log(error);
   });
 
 
-function loopAPI(resultsObject){
+function loopAPI(resultsObject) {
   const resultsArray = resultsObject.results;
 
   let newHTML = "";
 
   resultsArray.forEach(function(results) {
-console.log(results);
-    newHTML += `<div class="col-sm-6 col-md-4 col-lg-3">
+      console.log(results);
+
+      let typeResult = "Unknown";
+
+      if (results.type) {
+        typeResult = results.type;
+      }
+
+
+      let episodeCount = 0;
+
+      if (results.episode) {
+        episodeCount = results.episode.length;
+        console.dir(results.episode.length);
+      }
+
+
+        newHTML += `<div class="col-sm-6 col-md-4 col-lg-3">
     <div class="card">
-        <img class="image" src="https://via.placeholder.com/300" alt=${results.name}>
+        <img class="image" src="${results.image}" alt=${results.name}>
         <div class="details">
             <h4 class="name">${results.name}</h4>
-            <p>Type: ${results.type}</p>
-            <p>Episode count: </p>
-            <a class="btn btn-primary" href="details.html?id=">Details</a>
+            <p>Type: ${typeResult}</p>
+            <p>Episode count: ${episodeCount}</p>
+            <a class="btn btn-primary" href="details.html?id=${characterIdUrl[i].id}">Details</a>
         </div>
     </div>
 </div>`;
-});
+      });
 
-const resultsContainer = document.querySelector(".results");
-container.innerHTML = newHTML;
+    const resultsContainer = document.querySelector(".row.results"); resultsContainer.innerHTML = newHTML;
 
-}
-
-
-
-
-
-    /*const imageCharacter = document.querySelector(".image");
-    imageCharacter.src = results.image;
-    imageCharacter.alt = results.name;
-
-    const nameCharacter = document.querySelector(".name");
-    nameCharacter.innerHTML = results.name;
-
-    const typeCharacter = document.querySelector("p");
-
-    if (results.type !== " ") {
-      typeCharacter.innerHTML = results.type;
-    }  else {
-      typeCharacter = "Unknown";
-    }
-
-  */
+  }
