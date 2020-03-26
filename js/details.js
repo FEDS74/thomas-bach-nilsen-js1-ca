@@ -12,11 +12,9 @@ if (params.has("id")) {
 
 
 
-const detailsUrl = "https://rickandmortyapi.com/api/character/";
-const corsEnabledUrl = "https://cors-anywhere.herokuapp.com/" + detailsUrl;
-
-
-fetch(corsEnabledUrl)
+const detailsUrl = "https://rickandmortyapi.com/api/character/" + id;
+console.log(detailsUrl);
+fetch(detailsUrl)
   .then(function(response) {
     return response.json();
   })
@@ -29,39 +27,25 @@ fetch(corsEnabledUrl)
   });
 
 
-function loadDetails(detailsObject) {
-  const detailsContainer = document.querySelector(".detail-container");
-  const detailsArray = detailsObject.results;
-  //console.log(detailsObject);
-  //console.dir(detailsObject);
+function loadDetails(results) {
 
-
-
-    detailsArray.forEach(function(resultsId) {
-      console.log(resultsId);
+      console.log(result);
       const imageDetails = document.querySelector(".details-image");
-          imageDetails.src = resultsId.image;
-          imageDetails.alt = resultsId.name;
+          imageDetails.src = results.image;
+          imageDetails.alt = results.name;
 
       const characterName = document.querySelector(".detail-details > h1");
-        characterName.innerHTML = resultsId.name;
+        characterName.innerHTML = results.name;
 
       const characterStatus = document.querySelector("#status");
-      characterStatus.innerHTML = resultsId.status;
+      characterStatus.innerHTML = results.status;
 
       const characterSpecies = document.querySelector("#species");
-      characterSpecies.innerHTML = resultsId.species;
+      characterSpecies.innerHTML = results.species;
 
       const characterOrigin = document.querySelector("#origin");
-      characterOrigin.innerHTML = resultsId.origin.name;
+      characterOrigin.innerHTML = origin.name;
 
       const characterLocation = document.querySelector("#location");
-      characterLocation.innerHTML = resultsId.location.name;
-});
-
-
-
+      characterLocation.innerHTML = location.name;
 }
-/*
-
-  */
