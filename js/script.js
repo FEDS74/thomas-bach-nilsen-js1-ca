@@ -12,21 +12,21 @@ fetch(corsEnabledUrl)
     return response.json();
   })
   .then(function(json) {
-    loopAPI(json);
+    loadCharacter(json);
   })
   .catch(function(error) {
     //document.location.href = "error.html";
     console.log(error);
   });
 
-  function loadResultsApi(resultsObject) {
-    const resultsArray = resultsObject.results;
+  function loadCharacter(characterObject) {
+    const characterArray = characterObject.results;
 
-      const resultsContainer = document.querySelector(".results");
+      const characterContainer = document.querySelector(".results");
 
     let newHTML = "";
 
-    resultsArray.forEach(function(results) {
+    characterArray.forEach(function(results) {
       console.log(results);
 
       let typeResult = "Unknown";
@@ -58,6 +58,6 @@ fetch(corsEnabledUrl)
     });
 
 
-    resultsContainer.innerHTML = newHTML;
+    characterContainer.innerHTML = newHTML;
 
   }
