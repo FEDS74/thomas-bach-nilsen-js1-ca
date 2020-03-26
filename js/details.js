@@ -1,6 +1,7 @@
 const queryString = document.location.search;
 const params = new URLSearchParams(queryString);
 
+
 let id;
 
 if (params.has("id")) {
@@ -9,8 +10,11 @@ if (params.has("id")) {
   document.location.href = "/";
 }
 
+
+
 const detailsUrl = "https://rickandmortyapi.com/api/character/";
-const detailsIdUrl = `${detailsUrl}${id}`;
+const corsEnabledUrl = "https://cors-anywhere.herokuapp.com/" + detailsUrl;
+const detailsIdUrl = `${corsEnabledUrl}${id}`;
 
 fetch(detailsIdUrl)
   .then(function(response) {
@@ -26,15 +30,18 @@ fetch(detailsIdUrl)
 
 
 function loadDetails(detailsObject) {
+  const detailsContainer = document.querySelector(".detail-container");
   const detailsArray = detailsObject.results;
   //console.log(detailsObject);
   //console.dir(detailsObject);
 
-    const detailsContainer = document.querySelector(".detail-container");
+
 
     detailsArray.forEach(function(resultsId) {
       console.log(resultsId);
-
+      const imageDetails = document.querySelector(".details-image");
+          imageDetails.src = resultsId.image;
+          imageDetails.alt = resultsId.name;
 
 
 });
@@ -42,9 +49,7 @@ function loadDetails(detailsObject) {
 
 
 }
-/*  const imageDetails = document.querySelector(".details-image");
-    imageDetails.src = results.image;
-    imageDetails.alt = results.name;
+/*
 
   const characterName = document.querySelector(".detail-details > h1");
     characterName.innerHTML = results.name;*/
