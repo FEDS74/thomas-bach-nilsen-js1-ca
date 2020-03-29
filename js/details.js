@@ -13,7 +13,9 @@ if (params.has("id")) {
 
 
 const detailsUrl = "https://rickandmortyapi.com/api/character/" + id;
+
 console.log(detailsUrl);
+
 fetch(detailsUrl)
   .then(function(response) {
     return response.json();
@@ -22,14 +24,13 @@ fetch(detailsUrl)
     loadDetails(json);
   })
   .catch(function(error) {
-    //document.location.href = "error.html";
-    console.log(error);
+    document.location.href = "error.html";
   });
 
 
 function loadDetails(results) {
 
-      console.log(result);
+      console.log(results);
       const imageDetails = document.querySelector(".details-image");
           imageDetails.src = results.image;
           imageDetails.alt = results.name;
@@ -44,8 +45,8 @@ function loadDetails(results) {
       characterSpecies.innerHTML = results.species;
 
       const characterOrigin = document.querySelector("#origin");
-      characterOrigin.innerHTML = origin.name;
+      characterOrigin.innerHTML = results.origin.name;
 
       const characterLocation = document.querySelector("#location");
-      characterLocation.innerHTML = location.name;
+      characterLocation.innerHTML = results.location.name;
 }

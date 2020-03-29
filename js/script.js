@@ -15,8 +15,7 @@ fetch(corsEnabledUrl)
     loadCharacter(json);
   })
   .catch(function(error) {
-    //document.location.href = "error.html";
-    console.log(error);
+    document.location.href = "error.html";
   });
 
   function loadCharacter(characterObject) {
@@ -51,7 +50,7 @@ fetch(corsEnabledUrl)
               <h4 class="name">${results.name}</h4>
               <p>Type: ${typeResult}</p>
               <p>Episode count: ${episodeCount}</p>
-              <a class="btn btn-primary" href="details.html?id=">Details</a>
+              <a class="btn btn-primary" href="details.html?id=${results.id}">Details</a>
           </div>
       </div>
   </div>`;
