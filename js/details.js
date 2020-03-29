@@ -15,6 +15,7 @@ if (params.has("id")) {
 const detailsUrl = "https://rickandmortyapi.com/api/character/" + id;
 
 console.log(detailsUrl);
+console.log(this);
 
 fetch(detailsUrl)
   .then(function(response) {
@@ -49,4 +50,4 @@ function loadDetails(results) {
 
       const characterLocation = document.querySelector("#location");
       characterLocation.innerHTML = results.location.name;
-}
+    }

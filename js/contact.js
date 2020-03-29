@@ -80,6 +80,6 @@ function checkInputLength(value) {
 
 
 function validateEmail(email) {
-  const regEx = /\S+@\S+\.\S+/;
-  return regEx.test(email);
+  const emailExpression = /\S+@\S+\.\S+/;
+  return emailExpression.test(email);
 }
